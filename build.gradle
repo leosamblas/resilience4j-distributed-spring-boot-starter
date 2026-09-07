@@ -1,0 +1,80 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'com.resilience'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // BOM do Spring Boot 4.1.1 — alinha todas as versões gerenciadas pelo ecossistema Spring Boot
+    api platform('org.springframework.boot:spring-boot-dependencies:4.1.1')
+
+    // Starter Resilience4j para Spring Boot 4 (versão fixada explicitamente devido a
+    // limitação aberta no resilience4j-bom para resolução automática desta versão)
+    api 'io.github.resilience4j:resilience4j-spring-boot4:2.4.0'
+
+    // Redis Reativo (pub/sub + chave/valor) — versão alinhada via BOM do Boot
+    api 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+
+    // O Actuator é opcional para a aplicação consumidora: o endpoint de diagnóstico
+    // (DistributedCircuitBreakerEndpoint) só é autoconfigurado quando o Actuator estiver
+    // presente no classpath do consumidor (@ConditionalOnClass). O uso de compileOnly aqui
+    // permite compilar a classe do endpoint na biblioteca sem forçar o consumidor a usá-lo.
+    compileOnly 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor platform('org.springframework.boot:spring-boot-dependencies:4.1.1')
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation platform('org.springframework.boot:spring-boot-dependencies:4.1.1')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-actuator'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.testcontainers:junit-jupiter:1.20.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showExceptions true
+        showCauses true
+        showStackTraces true
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+
+            pom {
+                name = 'Resilience4j Distributed Circuit Breaker Spring Boot Starter'
+                description = 'Shares circuit breaker OPEN/CLOSED state across pods of the same service via Redis pub/sub, on top of Resilience4j.'
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'internalReleases'
+            url = uri(project.findProperty('internalRepoUrl') ?: 'https://your-artifactory/libs-release-local')
+            credentials {
+                username = project.findProperty('internalRepoUser') ?: System.getenv('ARTIFACTORY_USER')
+                password = project.findProperty('internalRepoPassword') ?: System.getenv('ARTIFACTORY_PASSWORD')
+            }
+        }
+    }
+}
