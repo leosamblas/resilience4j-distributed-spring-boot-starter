@@ -1,4 +1,4 @@
-package com.resilience.distributed;
+package com.resilience.distributed.autoconfigure;
 
 import java.time.Duration;
 import java.util.ArrayList;

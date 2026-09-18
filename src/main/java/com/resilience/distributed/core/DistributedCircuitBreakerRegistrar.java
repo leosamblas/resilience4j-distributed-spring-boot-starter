@@ -1,7 +1,8 @@
-package com.resilience.distributed;
+package com.resilience.distributed.core;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
+import com.resilience.distributed.autoconfigure.DistributedCircuitBreakerProperties;
 
 /**
  * Registra automaticamente cada {@link CircuitBreaker} relevante no

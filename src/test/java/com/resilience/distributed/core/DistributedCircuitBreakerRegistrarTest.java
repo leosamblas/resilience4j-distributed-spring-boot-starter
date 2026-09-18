@@ -1,4 +1,6 @@
-package com.resilience.distributed;
+package com.resilience.distributed.core;
+ 
+ import com.resilience.distributed.autoconfigure.DistributedCircuitBreakerProperties;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;

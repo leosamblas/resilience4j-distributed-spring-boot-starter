@@ -18,6 +18,8 @@ import org.testcontainers.utility.DockerImageName;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import org.junit.jupiter.api.DisplayName;
+import com.resilience.distributed.autoconfigure.DistributedCircuitBreakerProperties;
+import com.resilience.distributed.core.DistributedCircuitBreakerCoordinator;
 
 @Testcontainers
 @DisplayName("Testes de Integração Ponta a Ponta com Redis Real (Testcontainers)")

@@ -1,4 +1,4 @@
-package com.resilience.distributed;
+package com.resilience.distributed.actuator;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -9,6 +9,7 @@ import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Selector;
 
+import com.resilience.distributed.core.DistributedCircuitBreakerCoordinator;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import reactor.core.publisher.Flux;

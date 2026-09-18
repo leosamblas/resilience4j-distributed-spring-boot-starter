@@ -1,4 +1,6 @@
-package com.resilience.distributed;
+package com.resilience.distributed.actuator;
+ 
+ import com.resilience.distributed.core.DistributedCircuitBreakerCoordinator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;

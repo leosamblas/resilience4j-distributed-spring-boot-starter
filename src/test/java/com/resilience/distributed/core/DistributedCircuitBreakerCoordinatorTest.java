@@ -1,4 +1,6 @@
-package com.resilience.distributed;
+package com.resilience.distributed.core;
+ 
+ import com.resilience.distributed.autoconfigure.DistributedCircuitBreakerProperties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;

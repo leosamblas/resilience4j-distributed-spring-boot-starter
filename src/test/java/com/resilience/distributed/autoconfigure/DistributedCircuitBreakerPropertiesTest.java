@@ -1,4 +1,4 @@
-package com.resilience.distributed;
+package com.resilience.distributed.autoconfigure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

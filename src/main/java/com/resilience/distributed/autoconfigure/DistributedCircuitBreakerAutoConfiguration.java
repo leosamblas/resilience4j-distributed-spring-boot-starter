@@ -1,5 +1,6 @@
-package com.resilience.distributed;
+package com.resilience.distributed.autoconfigure;
 
+import org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnAvailableEndpoint;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -11,6 +12,9 @@ import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
 import org.springframework.data.redis.listener.ReactiveRedisMessageListenerContainer;
 
+import com.resilience.distributed.actuator.DistributedCircuitBreakerEndpoint;
+import com.resilience.distributed.core.DistributedCircuitBreakerCoordinator;
+import com.resilience.distributed.core.DistributedCircuitBreakerRegistrar;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 
 /**
@@ -78,8 +82,7 @@ public class DistributedCircuitBreakerAutoConfiguration {
     public static class DistributedCircuitBreakerEndpointConfiguration {
 
         @Bean
-        @org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnAvailableEndpoint(
-            endpoint = DistributedCircuitBreakerEndpoint.class)
+        @ConditionalOnAvailableEndpoint(endpoint = DistributedCircuitBreakerEndpoint.class)
         public DistributedCircuitBreakerEndpoint distributedCircuitBreakerEndpoint(
                 CircuitBreakerRegistry registry,
                 DistributedCircuitBreakerCoordinator coordinator) {

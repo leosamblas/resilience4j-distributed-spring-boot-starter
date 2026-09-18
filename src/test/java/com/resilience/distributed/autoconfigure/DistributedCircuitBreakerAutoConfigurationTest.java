@@ -1,4 +1,4 @@
-package com.resilience.distributed;
+package com.resilience.distributed.autoconfigure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.FilteredClassLoader;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 
+import com.resilience.distributed.actuator.DistributedCircuitBreakerEndpoint;
+import com.resilience.distributed.core.DistributedCircuitBreakerCoordinator;
+import com.resilience.distributed.core.DistributedCircuitBreakerRegistrar;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 
 @DisplayName("Testes de Autoconfiguração do Spring Boot (DistributedCircuitBreakerAutoConfiguration)")

@@ -1,1 +1,1 @@
-com.resilience.distributed.DistributedCircuitBreakerAutoConfiguration
+com.resilience.distributed.autoconfigure.DistributedCircuitBreakerAutoConfiguration

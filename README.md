@@ -267,16 +267,16 @@ flowchart TD
 
 ---
 
-### 1. Componentes Internos do Starter
+### 1. Componentes Internos do Starter e Organização de Pacotes
 
-O starter organiza suas responsabilidades em 4 componentes desacoplados:
+O starter organiza suas responsabilidades nos seguintes módulos e subpacotes desacoplados:
 
-| Componente | Classe Principal | Responsabilidade |
+| Componente / Pacote | Classe Principal | Responsabilidade |
 | :--- | :--- | :--- |
-| **Auto-Configuração** | [`DistributedCircuitBreakerAutoConfiguration`](src/main/java/com/resilience/distributed/DistributedCircuitBreakerAutoConfiguration.java) | Configura condicionalmente os beans reativos do Redis, propriedades e o coordenador via anotações `@AutoConfiguration` e `@ConditionalOnProperty`. |
-| **Coordenador Reativo** | [`DistributedCircuitBreakerCoordinator`](src/main/java/com/resilience/distributed/DistributedCircuitBreakerCoordinator.java) | Núcleo reativo que gerencia subscrições Pub/Sub, publicação de eventos, jitter, renovação de TTL e descarte de recursos no encerramento. |
-| **Auto-Registrador** | [`DistributedCircuitBreakerRegistrar`](src/main/java/com/resilience/distributed/DistributedCircuitBreakerRegistrar.java) | Monitora o `CircuitBreakerRegistry` no startup e escuta a criação dinâmica de novos breakers em tempo de execução via evento `EntryAddedEvent`. |
-| **Endpoint Actuator** | [`DistributedCircuitBreakerEndpoint`](src/main/java/com/resilience/distributed/DistributedCircuitBreakerEndpoint.java) | Endpoint HTTP reativo (`/actuator/distributedCircuitBreakers`) para telemetria, diagnóstico e verificação de drift de sincronismo (*read-only*). |
+| **Auto-Configuração**<br/>`com.resilience.distributed.autoconfigure` | [`DistributedCircuitBreakerAutoConfiguration`](src/main/java/com/resilience/distributed/autoconfigure/DistributedCircuitBreakerAutoConfiguration.java)<br/>[`DistributedCircuitBreakerProperties`](src/main/java/com/resilience/distributed/autoconfigure/DistributedCircuitBreakerProperties.java) | Configura condicionalmente os beans reativos do Redis, mapeamento das propriedades `resilience4j.distributed.*` e o coordenador via `@AutoConfiguration`. |
+| **Coordenador Reativo**<br/>`com.resilience.distributed.core` | [`DistributedCircuitBreakerCoordinator`](src/main/java/com/resilience/distributed/core/DistributedCircuitBreakerCoordinator.java) | Núcleo reativo que gerencia subscrições Pub/Sub, publicação de eventos, jitter, renovação de TTL e descarte de recursos no encerramento. |
+| **Auto-Registrador**<br/>`com.resilience.distributed.core` | [`DistributedCircuitBreakerRegistrar`](src/main/java/com/resilience/distributed/core/DistributedCircuitBreakerRegistrar.java) | Monitora o `CircuitBreakerRegistry` no startup e escuta a criação dinâmica de novos breakers em tempo de execução via evento `EntryAddedEvent`. |
+| **Endpoint Actuator**<br/>`com.resilience.distributed.actuator` | [`DistributedCircuitBreakerEndpoint`](src/main/java/com/resilience/distributed/actuator/DistributedCircuitBreakerEndpoint.java) | Endpoint HTTP reativo (`/actuator/distributedCircuitBreakers`) para telemetria, diagnóstico e verificação de drift de sincronismo (*read-only*). |
 
 ---
 

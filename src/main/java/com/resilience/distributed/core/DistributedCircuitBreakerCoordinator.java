@@ -1,4 +1,4 @@
-package com.resilience.distributed;
+package com.resilience.distributed.core;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -16,6 +16,7 @@ import org.springframework.data.redis.listener.ReactiveRedisMessageListenerConta
 
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
+import com.resilience.distributed.autoconfigure.DistributedCircuitBreakerProperties;
 import reactor.core.Disposable;
 import reactor.core.Disposables;
 import reactor.core.publisher.Mono;
