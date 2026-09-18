@@ -2,7 +2,7 @@
 
 Starter para **Spring Boot** que distribui o estado (`OPEN` e `CLOSED`) dos Circuit Breakers do **Resilience4j** entre múltiplos pods e réplicas de um serviço através do **Redis (Pub/Sub + chaves compartilhadas com TTL)**.
 
-Construído para **Java 21+**, **Spring Boot 4.x** (e compatível com 3.x) e **Resilience4j 2.4.0** (`resilience4j-spring-boot4`).
+Construído para **Java 25+**, **Spring Boot 4.x** (e compatível com 3.x) e **Resilience4j 2.4.0** (`resilience4j-spring-boot4`).
 
 ---
 
