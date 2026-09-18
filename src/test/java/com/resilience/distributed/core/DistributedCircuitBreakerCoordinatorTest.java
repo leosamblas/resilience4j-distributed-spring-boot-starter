@@ -38,6 +38,7 @@ import reactor.core.publisher.Sinks;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Testes do Coordenador Distribuído (DistributedCircuitBreakerCoordinator)")
+@SuppressWarnings("unchecked")
 class DistributedCircuitBreakerCoordinatorTest {
 
     @Mock

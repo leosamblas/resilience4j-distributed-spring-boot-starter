@@ -21,7 +21,7 @@ import org.junit.jupiter.api.DisplayName;
 import com.resilience.distributed.autoconfigure.DistributedCircuitBreakerProperties;
 import com.resilience.distributed.core.DistributedCircuitBreakerCoordinator;
 
-@Testcontainers
+@Testcontainers(disabledWithoutDocker = true)
 @DisplayName("Testes de Integração Ponta a Ponta com Redis Real (Testcontainers)")
 class DistributedCircuitBreakerIntegrationTest {
 
